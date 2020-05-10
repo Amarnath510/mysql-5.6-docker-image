@@ -49,20 +49,20 @@
 
 
 ## Run it on a network (so that other containers(like a spring-boot-app) can access the database container)
-$ docker network create spring-boot-network  (some name)
-$ docker network ls
-$ `docker run --network spring-boot-network --name mysql-docker-demo -e MYSQL_ROOT_PASSWORD=dev -e MYSQL_DATABASE=company -d mysql:5.6`
+- $ docker network create spring-boot-network  (some name)
+- $ docker network ls
+- $ `docker run --network spring-boot-network --name mysql-docker-demo -e MYSQL_ROOT_PASSWORD=dev -e MYSQL_DATABASE=company -d mysql:5.6`
   Here,
   --network should give "spring-boot-network"
-$ Now run docker-spring-boot-demo in a container and make sure it is linked to the same network as mysql,
+- $ Now run docker-spring-boot-demo in a container and make sure it is linked to the same network as mysql,
   `docker run --network spring-boot-network --name docker-spring-boot-demo  -d -p 8181:8181 amarnath510/docker-spring-boot-demo`
-NOTE: Always use --name and give names to your containers
-$ Now login to `docker container exec -it docker-spring-boot-demo bash`
-$# ping google.com
+- NOTE: Always use --name and give names to your containers
+- $ Now login to `docker container exec -it docker-spring-boot-demo bash`
+  - $# ping google.com
     PING google.com (172.217.160.142) 56(84) bytes of data.
     64 bytes from maa03s29-in-f14.1e100.net (172.217.160.142): icmp_seq=1 ttl=37 time=45.2 ms
     64 bytes from maa03s29-in-f14.1e100.net (172.217.160.142): icmp_seq=2 ttl=37 time=90.6 ms
-$# ping mysql-docker-demo       NOTE: This should work only then we will be able to access the database
+  - $# ping mysql-docker-demo       NOTE: This should work only then we will be able to access the database
     PING mysql-docker-demo (172.18.0.2) 56(84) bytes of data.
     64 bytes from mysql-docker-demo.spring-boot-network (172.18.0.2): icmp_seq=1 ttl=64 time=0.104 ms
     64 bytes from mysql-docker-demo.spring-boot-network (172.18.0.2): icmp_seq=2 ttl=64 time=0.075 ms
